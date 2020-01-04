@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!--CSS and Bootstrap link-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Weather Dashboard</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 citySearch">
+
+                <h5>Search For A City</h5>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="" aria-label=""
+                        aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">search</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-9 forcastBox">
+                <div class="row cityCast">
+                    <div id="city"></div>
+                    <div id="temp"></div>
+                    <div id="humidity"></div>
+                    <div id="wind"></div>
+                    <div id="uvIndex"></div>
+                </div>
+
+                <div class="row fiveCast">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        // // This is the API key
+        // var APIKey = "3f57d1d0ccb27e3179f39171730967ec";
+
+        // This is the URL to query the database
+        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=3f57d1d0ccb27e3179f39171730967ec";
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+
+        })
+
+            .then(function (response) {
+
+                console.log(queryURL);
+                console.log(response);
+
+                $("#city").html("<h3>" + response.city.name + "</h3>");
+                $("#temp").text("Temperature (F) " + response.city);
+
+                var tempF = (response.city - 273.15) * 1.80 + 32;
+                $(".tempF").text("Temperature (Kelvin) " + tempF);
+            });
+
+    </script>
+</body>
+
+</html>
