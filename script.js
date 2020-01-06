@@ -13,7 +13,11 @@ var storedHistory = [];
 var forecastURL;
 var currentWeatherURL;
 
+var tempSearchHis = localStorage.getItem("storedHistory");
+if (tempSearchHis != null)
+    storedHistory = tempSearchHis.split(",");
 
+// Search button click event
 searchBtn.on("click", function () {
 
     currentWeatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchBar.val() + weatherKey;
@@ -22,12 +26,13 @@ searchBtn.on("click", function () {
 
     $(".currentCast").empty();
     $(".forecast-head").empty();
-    $(".fiveDayForecast").empty();
+    $("#fiveForecast").empty();
 
     generateCurrentWeather();
+    generateForecast();
 });
 
-
+// Function and ajax call to the current weather
 function generateCurrentWeather() {
     $.ajax({
         url: currentWeatherURL,
@@ -70,6 +75,40 @@ function generateCurrentWeather() {
     });
 }
 
+function generateForecast() {
 
+    $.ajax({
+        url: forecastURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response)
 
+        $("#fiveForecast").empty();
+        $(".forecast-head").empty();
+        $(".forecast-head")
+
+        var forecastHead = $('<h5>5-Day Forecast:</h5>');
+        $(".forecast-head").append(forecastHead);
+
+        for (i = 0; i <= 4; i++) {
+            console.log(i)
+
+            var newDay = moment().add(1 + i, 'days').format('MM/DD/YYYY');
+            var iconForecast = response.list[i].weather[0].icon;
+            var iconImgURL = "http://openweathermap.org/img/w/" + iconForecast + ".png";
+            var tempForecast = Math.round(response.list[i].main.temp);
+            var humidityForecast = response.list[i].main.humidity;
+
+            $("#fiveForecast")
+                .append($("<div>").addClass("col-lg-2 days")
+                    .append($("<p>").html(newDay))
+                    .append($("<img src=" + iconImgURL + ">"))
+                    .append($("<p>").html("Temp: " + tempForecast + " °F"))
+                    .append($("<p>").html("Humidity: " + humidityForecast + "%")))
+
+        }
+
+    });
+
+}
 
