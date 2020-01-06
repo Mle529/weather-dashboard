@@ -5,79 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Weather-Dashboard</title>
 
     <!--CSS and Bootstrap link-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-replace-svg></script>
 
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="header">
-            <h1>Weather Dashboard</h1>
-        </div>
 
+    <div class="header">
+        <h1>Weather Dashboard</h1>
+    </div>
+
+    <div class="container">
         <div class="row">
-            <div class="col-sm-3 citySearch">
-
-                <h5>Search For A City</h5>
+            <div class="col-sm-3" id="search-col">Search for a city:
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="" aria-label=""
+                    <input type="text" class="form-control" id="search-bar" aria-label="Recipient's username"
                         aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">search</button>
+                        <button class="btn btn-outline-secondary" type="button" id="search-btn"><i class="fa fa-search"
+                                aria-hidden="true"></i></button>
                     </div>
                 </div>
+                <div class="row" id="searchHistory"></div>
+            </div>
+        </div>
 
+        <div class="col-sm-9" id="forecastBox">
+            <div class="row">
+                <div class="currentCast"></div>
             </div>
 
-            <div class="col-sm-9 forcastBox">
-                <div class="row cityCast">
-                    <div id="city"></div>
-                    <div id="temp"></div>
-                    <div id="humidity"></div>
-                    <div id="wind"></div>
-                    <div id="uvIndex"></div>
-                </div>
+            <div class="row">
+                <div class="forecast">
+                    <div class="row">
+                        <div class="forecast-head"></div>
+                    </div>
 
-                <div class="row fiveCast">
+                    <div class="row">
+                        <div class="fiveDayForecast"></div>
+                    </div>
 
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+    <script src="moment.js"></script>
 
-    <script>
-        // // This is the API key
-        // var APIKey = "3f57d1d0ccb27e3179f39171730967ec";
-
-        // This is the URL to query the database
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=3f57d1d0ccb27e3179f39171730967ec";
-
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-
-        })
-
-            .then(function (response) {
-
-                console.log(queryURL);
-                console.log(response);
-
-                $("#city").html("<h3>" + response.city.name + "</h3>");
-                $("#temp").text("Temperature (F) " + response.city);
-
-                var tempF = (response.city - 273.15) * 1.80 + 32;
-                $(".tempF").text("Temperature (Kelvin) " + tempF);
-            });
-
-    </script>
 </body>
 
 </html>
