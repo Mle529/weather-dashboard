@@ -1,0 +1,46 @@
+.header {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px 0px 10px 0px;
+}
+
+.col-sm-3 {
+    background-color: whitesmoke;
+}
+
+#search-col {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#forecastBox {
+    margin-left: 10px;
+}
+
+.forecast-head {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.currentCast {
+    border-bottom-left-radius: solid 1px whitesmoke;
+    border-top: solid 1px whitesmoke;
+    margin-top: 10px;
+}
+
+.badge{
+    color: white;
+    background-color: rgb(114, 24, 24);
+}
+
+.days{
+    display:inline-block;
+    background-color: rgb(7, 7, 248);
+    border-radius: 4px;
+    margin-right: 5px;
+    margin-left: 15px;
+    color: white;
+    padding: 5px
+}
